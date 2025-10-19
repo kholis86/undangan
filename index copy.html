@@ -65,21 +65,19 @@
       max-width: var(--max-w);
       margin: 0 auto;
       padding-bottom: calc(var(--nav-h) + 28px);
-      padding: 0 16px;
+      /* padding: 0 16px; */
     }
 
     /* Section default */
     .section {
-      width: 100vw;        /* full viewport width */
-      margin: 0 -16px;     /* tarik background hingga tepi layar */
-      padding: 34px 16px;  /* padding normal tetap ada */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      box-sizing: border-box;
+      padding: 34px 0;
+      transition: background 0.5s ease;
     }
 
     /* Cover */
@@ -229,7 +227,7 @@
 
     .card-border {
       background: rgba(255, 255, 255, 0.06);
-      border: 2px solid rgba(97, 71, 1, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 16px;
       padding: 24px 20px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.25);
@@ -402,7 +400,7 @@
       font-weight: 700;
       margin-bottom: 6px;
       letter-spacing: 1px;
-      color: #808080;
+      color: #fff;
     }
 
     .event-card .day {
@@ -434,27 +432,12 @@
     }
 
     /* 🟢 Page pastel backgrounds */
-    #page2 { 
-      background: #fcefe6; 
-      color: #333; 
-      background-image: url('img/flowers-4931217_1280.png');
-      background-repeat: repeat;
-      background-size: 160% auto;
-    }
-    #page3,#page4,#page5,#page6,#page7 { 
-      background: #fcefe6; 
-      color: #333; 
-      background-image: url('img/flowers-4931217_1280.png');
-      background-repeat: repeat;
-      background-size: 160% auto;
-    }
-
-    .event-card hr {
-      border: 0;
-      height: 1px;
-      background-color: #000;
-      margin: 8px 0 16px;
-    }
+    #page2 { background: #fcefe6; color: #333; }
+    #page3 { background: #e6f7ff; color: #333; }
+    #page4 { background: #fff4f4; color: #333; }
+    #page5 { background: #f0f8f0; color: #333; }
+    #page6 { background: #fdf6e3; color: #333; }
+    #page7 { background: #fef9f4; color: #333; }
 
   </style>
 </head>

@@ -232,7 +232,7 @@
       background: rgba(255, 255, 255, 0.06);
       border: 2px solid rgba(97, 71, 1, 0.2);
       border-radius: 16px;
-      padding: 24px 20px;
+      padding: 54px 30px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.25);
       max-width: 320px;
       margin: 0 auto;
@@ -257,7 +257,7 @@
 
     .gallery-main {
       width: 100%;
-      height: 400px;
+      height: 500px;
       border-radius: 12px;
       overflow: hidden;
       background: #222;
@@ -273,9 +273,13 @@
     .thumbs {
       display: flex;
       gap: 10px;
-      overflow: auto;
+      overflow-x: auto;         /* hanya scroll horizontal */
+      overflow-y: hidden;       /* cegah scroll vertikal */
       padding: 8px 4px;
       scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; /* smooth scroll di iOS */
+      max-width: 100%;          /* batasi lebar agar tidak buat halaman melebar */
+      box-sizing: border-box;   /* pastikan padding tak menambah lebar total */
     }
 
     .thumb {
@@ -287,6 +291,17 @@
       cursor: pointer;
       border: 2px solid transparent;
       scroll-snap-align: center;
+    }
+
+    .thumbs::-webkit-scrollbar {
+      height: 6px;
+    }
+    .thumbs::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 4px;
+    }
+    .thumbs::-webkit-scrollbar-track {
+      background: transparent;
     }
 
     .thumb img {
@@ -327,7 +342,7 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: 12px;
-      height: 68px;
+      height: 40px;
       display: flex;
       gap: 8px;
       align-items: center;
@@ -349,13 +364,13 @@
       align-items: center;
       justify-content: center;
       color: #e6f0ff;
-      font-size: 13px;
+      font-size: 10px;
       text-decoration: none;
     }
 
     .nav-btn i {
       display: block;
-      font-size: 18px;
+      font-size: 12px;
       margin-bottom: 3px;
     }
 
@@ -457,12 +472,141 @@
       margin: 8px 0 16px;
     }
 
+    #musicBtn {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2000;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 50px;
+      background: #fff;
+      color: #07142a;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
+    }
+
+    #musicBtn:hover {
+      transform: scale(1.1);
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('img/and1(2).jpeg'); /* ganti dengan fotomu */
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.6); /* efek redup lembut */
+      z-index: 0;
+    }
+
+    /* Pastikan teks di atas foto */
+    .hero-text, .lower-third {
+      position: absolute;
+      z-index: 2;
+      color: #fff;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50px;
+      left: 40px;
+      text-align: left;
+      font-family: 'Playfair Display', serif;
+      color: rgba(230, 240, 255, 0.9);
+    }
+
+    .hero-text .small {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .hero-text .title {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .hero-text .names {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .lower-third {
+      position: absolute;
+      right: 20px;
+      bottom: 60px;
+      text-align: right;
+      font-size: 0.75rem;
+      color: rgba(230, 240, 255, 0.85);
+      max-width: 330px;
+      font-style: italic;
+    }
+
+    .lower-third span {
+      display: block;
+      font-size: 0.8rem;
+      margin-top: 4px;
+      opacity: 0.85;
+    }
+
+    .lower-third hr {
+      margin-top: 6px;
+      border: 0;
+      height: 1px;
+      background: rgba(230,240,255,0.4);
+    }
+
+    .separator {
+      background: #fcefe6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 120px;
+      position: relative;
+    }
+
+    .and-symbol {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: rgba(51, 51, 51, 0.8);
+      padding: 0 20px;
+    }
+
+    /* Garis kiri dan kanan */
+    .and-symbol::before,
+    .and-symbol::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40px;        /* panjang garis — bisa kamu sesuaikan */
+      height: 1.5px;
+      background: rgba(51, 51, 51, 0.5);
+    }
+
+    .and-symbol::before {
+      right: 100%;
+      margin-right: 12px;
+    }
+
+    .and-symbol::after {
+      left: 100%;
+      margin-left: 12px;
+    }
+
   </style>
 </head>
 
 <body>
   <div id="cover"
-    style="background-image:url('img/YUR_4810.JPG')">
+    style="background-image:url('img/and1(1).jpeg')">
     <div class="cover-inner">
       <div class="cover-title">The Wedding Of</div>
       <div class="cover-name">Putri &amp; Putra</div>
@@ -473,35 +617,47 @@
 
   <main class="wrap">
     <section id="page1" class="section hero">
-      <div class="small">Welcome to Our Wedding</div>
-      <div class="title">We invite you to celebrate</div>
-      <div class="names">Putri &amp; Putra</div>
+      <div class="hero-bg"></div>
       <div class="oval"><img
-          src="img/YUR_4810.JPG"
-          alt="Foto pasangan"></div>
+        src="img/and1(1).jpeg"
+        alt="Foto pasangan"></div>
+        <div class="hero-text">
+          <div class="small">Welcome to Our Wedding</div>
+          <div class="title">We invite you to celebrate</div>
+          <div class="names">Putri &amp; Putra</div>
+        </div>
+        <div class="lower-third">
+          <p>“Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).”</p>
+          <span>(QS. Az Zariyat: 49)</span>
+          <hr>
+        </div>
     </section>
 
-    <section id="page2" class="section">
+    <!-- <section id="page2" class="section">
       <div class="quote">
         <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit — dummy quote sebagai pembuka yang hangat.”</p>
         <cite>- Dummy Quote -</cite>
       </div>
-    </section>
+    </section> -->
 
     <section id="page3" class="section">
       <div class="person-card card-border">
         <div class="oval"><img
-            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
+            src="img/and1(5).jpeg"
             alt="Mempelai wanita"></div>
         <h3>Nama Mempelai Wanita</h3>
         <p>Putri dari Bapak X &amp; Ibu Y</p>
       </div>
     </section>
 
+    <section id="separator" class="section separator">
+      <div class="and-symbol">&amp;</div>
+    </section>
+
     <section id="page4" class="section">
       <div class="person-card card-border">
         <div class="oval"><img
-            src="https://images.unsplash.com/photo-1545996124-1b94a5a8c5a6?auto=format&fit=crop&w=900&q=80"
+            src="img/and1(8).jpeg"
             alt="Mempelai pria"></div>
         <h3>Nama Mempelai Pria</h3>
         <p>Putra dari Bapak A &amp; Ibu B</p>
@@ -511,20 +667,25 @@
     <section id="page5" class="section">
       <div class="gallery-wrap">
         <div class="gallery-main" id="galleryMain"><img
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80"
+            src="img/and1(3).jpeg"
             alt="Memories"></div>
         <div class="thumbs" id="thumbs">
           <div class="thumb active"
-            data-src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=60">
+            data-src="img/and1(3).jpeg">
+            <img src="img/and1(3).jpeg">
           </div>
           <div class="thumb"
-            data-src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=60">
+            data-src="img/and1(4).jpeg">
+            <img src="img/and1(4).jpeg">
           </div>
           <div class="thumb"
-            data-src="https://images.unsplash.com/photo-1508216315-02b7d4a61d6e?auto=format&fit=crop&w=1400&q=80"><img
-              src="https://images.unsplash.com/photo-1508216315-02b7d4a61d6e?auto=format&fit=crop&w=600&q=60"></div>
+            data-src="img/and1(7).jpeg"><img
+              src="img/and1(7).jpeg">
+          </div>
+          <div class="thumb"
+            data-src="img/and1(1).jpeg"><img
+              src="img/and1(1).jpeg">
+          </div>
         </div>
       </div>
     </section>
@@ -545,7 +706,7 @@
           <p class="date">20</p>
           <p class="day">Sabtu, Desember 2025</p>
           <p class="location">Masjid Al-Falah, Jakarta</p>
-          <a href="https://www.google.com/maps/place/Masjid+Al-Falah,+Jakarta" target="_blank" class="map-btn">📍 Lihat
+          <a href="https://google.com/maps?q=-7.4044464,111.2023701&z=17&hl=id" target="_blank" class="map-btn">📍 Lihat
             Peta</a>
         </div>
       
@@ -556,7 +717,7 @@
           <p class="date">20</p>
           <p class="day">Sabtu, Desember 2025</p>
           <p class="location">Gedung Serba Guna, Jakarta</p>
-          <a href="https://www.google.com/maps/place/Gedung+Serba+Guna,+Jakarta" target="_blank" class="map-btn">📍 Lihat
+          <a href="https://google.com/maps?q=-7.4044464,111.2023701&z=17&hl=id" target="_blank" class="map-btn">📍 Lihat
             Peta</a>
         </div>
       </div>
@@ -568,6 +729,14 @@
     </section>
   </main>
 
+  <audio id="bgMusic" loop>
+    <source src="msc/cundamani.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <button id="musicBtn"
+    style="display:none; position:fixed; top:20px; right:20px; z-index:2000; padding:10px 14px; border:none; border-radius:50px; background:#fff; color:#07142a; font-weight:600; cursor:pointer;">▶️</button>
+
   <nav class="bottom-nav">
     <a href="#page1" class="nav-btn"><i>🏠</i>Home</a>
     <a href="#page3" class="nav-btn"><i>👰</i>Bride</a>
@@ -577,10 +746,26 @@
 
   <script>
     const cover = document.getElementById('cover');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
     document.getElementById('openInvite').addEventListener('click', () => {
       cover.classList.add('hidden');
       document.body.style.overflow = 'auto';
+      
+      bgMusic.play();          // mainkan musik otomatis
+      musicBtn.style.display = 'block'; // tampilkan tombol play/pause
     });
+    musicBtn.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.textContent = '⏸️';
+      } else {
+        bgMusic.pause();
+        musicBtn.textContent = '▶️';
+      }
+    });
+    
     const thumbs = document.querySelectorAll('.thumb');
     const galleryMain = document.getElementById('galleryMain').querySelector('img');
     thumbs.forEach(t => t.addEventListener('click', () => {

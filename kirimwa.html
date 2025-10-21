@@ -1,0 +1,272 @@
+<!-- const linkUndanganDasar = "http://127.0.0.1:5500/" // Ganti dengan link dasar undangan Anda -->
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="assets/js/data.js"></script>
+        <title>Halaman Kirim Undangan WA - Maya & Dadang</title>
+        <style>
+            /* ==================== STYLE CSS ==================== */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background-color: #f4f4f4;
+                color: #333;
+            }
+            .container {
+                max-width: 700px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            h2 {
+                color: #5d4037;
+                border-bottom: 2px solid #5d4037;
+                padding-bottom: 5px;
+                margin-bottom: 20px;
+            }
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            input[type="text"] {
+                width: 95%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            #templateArea {
+                width: 98%;
+                min-height: 350px;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #a1a1a1;
+                border-radius: 4px;
+                font-size: 14px;
+                white-space: pre-wrap;
+                font-family: monospace;
+                resize: vertical;
+            }
+            button {
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 18px;
+                width: 100%;
+                margin-bottom: 10px;
+                transition: background-color 0.3s ease;
+            }
+            #tombolSalin {
+                background-color: #4caf50; /* Hijau WA */
+            }
+            #tombolSalin:hover {
+                background-color: #45a049;
+            }
+            #tombolReset {
+                background-color: #f44336; /* Merah */
+                font-size: 14px;
+                padding: 8px 20px;
+                width: 100%;
+            }
+            #tombolReset:hover {
+                background-color: #d32f2f;
+            }
+            .info-box {
+                margin-top: 15px;
+                padding: 10px;
+                background-color: #e3f2fd;
+                border-left: 5px solid #2196f3;
+            }
+            .highlight {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Halaman Kirim Pesan Undangan WA</h2>
+
+            <div class="info-box">
+                <p>
+                    📝 **PENTING:** Template di bawah otomatis tersimpan
+                    (*auto-saved*) di *browser* Anda setiap kali Anda
+                    mengeditnya.
+                </p>
+                <p>
+                    🔄️ Anda bisa mengembalikan template ke versi awal dengan
+                    menekan tombol **Reset Template ke Awal** di bawah.
+                </p>
+                <p>
+                    Pastikan teks **<span class="highlight"
+                        >[NAMA_PENERIMA]</span
+                    >** dan **<span class="highlight">[LINK_UNDANGAN]</span>**
+                    tidak diubah, karena sistem akan menggantinya secara
+                    otomatis.
+                </p>
+            </div>
+
+            <br />
+
+            <label for="templateArea"
+                >1. Template Ucapan Kiriman (Edit di sini)</label
+            >
+            <textarea id="templateArea"></textarea>
+
+            <button id="tombolReset">⚙️ Reset Template ke Awal</button>
+
+            <label for="namaPenerima">2. Nama Penerima</label>
+            <input
+                type="text"
+                id="namaPenerima"
+                placeholder="Masukkan nama penerima di sini, misalnya: Om, Tante, Teman, Konco Lawas ❤️"
+            />
+
+            <button id="tombolSalin">3. Salin Pesan WA</button>
+        </div>
+
+        <script>
+            // ==================== JAVASCRIPT ====================
+
+            // --- KONFIGURASI LINK & STORAGE ---
+            const linkUndanganDasar = "http://127.0.0.1:5500/" // <-- GANTI DENGAN LINK UNDANGAN ANDA
+            const TEMPLATE_STORAGE_KEY = "whatsapp_template_maya_dadang_v1"
+
+            const DEFAULT_TEMPLATE = `Kepada Yth. 
+Bapak/Ibu/Saudara/i
+[NAMA_PENERIMA]
+
+Assalamu'alaikum Wr. Wb.
+
+Bismillahirahmanirrahim.
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami:
+
+${WEDDING_DATA.couple.bride.name}
+         &
+${WEDDING_DATA.couple.groom.name}
+
+Berikut klik link untuk info lengkap dari acara kami :
+[LINK_UNDANGAN]
+
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Wassalamu'alaikum Wr. Wb.
+
+Terima Kasih..
+
+Hormat kami,
+${WEDDING_DATA.couple.jointName}
+__________
+*Simpan nomor jika link tidak dapat disentuh atau salin link ke chrome untuk membuka undangan`
+
+            // --- VARIABEL ELEMEN ---
+            const templateArea = document.getElementById("templateArea")
+            const inputNama = document.getElementById("namaPenerima")
+            const tombolSalin = document.getElementById("tombolSalin")
+            const tombolReset = document.getElementById("tombolReset")
+
+            // --- FUNGSI LOCAL STORAGE ---
+
+            function muatTemplateDariStorage() {
+                const templateTersimpan =
+                    localStorage.getItem(TEMPLATE_STORAGE_KEY)
+                // Gunakan template tersimpan jika ada, jika tidak, gunakan default
+                templateArea.value = templateTersimpan
+                    ? templateTersimpan.trim()
+                    : DEFAULT_TEMPLATE.trim()
+            }
+
+            function simpanTemplateKeStorage() {
+                localStorage.setItem(TEMPLATE_STORAGE_KEY, templateArea.value)
+            }
+
+            function resetTemplate() {
+                if (
+                    confirm(
+                        "Apakah Anda yakin ingin mengembalikan template ke format awal?"
+                    )
+                ) {
+                    localStorage.removeItem(TEMPLATE_STORAGE_KEY)
+                    templateArea.value = DEFAULT_TEMPLATE.trim()
+                }
+            }
+
+            // --- FUNGSI INTI ---
+
+            // Fungsi untuk memformat link undangan dengan parameter 'to'
+            function formatLink(nama) {
+                // Mengganti spasi di nama dengan '+' dan meng-encode untuk URL
+                const namaEncoded = nama.trim()
+                    ? encodeURIComponent(nama.trim().replace(/\s/g, "+"))
+                    : "Tamu+Undangan"
+                return `${linkUndanganDasar}?to=${namaEncoded}`
+            }
+
+            // Fungsi untuk membuat teks lengkap yang siap disalin
+            function buatPesanLengkap(nama) {
+                const currentTemplate = templateArea.value
+                const finalLink = formatLink(nama)
+
+                // Mengganti placeholder ([NAMA_PENERIMA] dan [LINK_UNDANGAN])
+                let pesan = currentTemplate
+                    .replace(/\[NAMA\_PENERIMA\]/g, nama.toUpperCase() || "...")
+                    .replace(/\[LINK\_UNDANGAN\]/g, finalLink)
+
+                return pesan
+            }
+
+            // Fungsi untuk menyalin teks
+            function salinTeks() {
+                const nama = inputNama.value.trim()
+                if (!nama) {
+                    alert("Harap masukkan Nama Penerima terlebih dahulu!")
+                    inputNama.focus()
+                    return
+                }
+
+                const pesanLengkap = buatPesanLengkap(nama)
+
+                // Menggunakan API Clipboard modern
+                navigator.clipboard
+                    .writeText(pesanLengkap)
+                    .then(() => {
+                        tombolSalin.textContent = "✅ Pesan Berhasil Disalin!"
+                        tombolSalin.style.backgroundColor = "#28a745"
+                        setTimeout(() => {
+                            tombolSalin.textContent = "3. Salin Pesan WA"
+                            tombolSalin.style.backgroundColor = "#4CAF50"
+                        }, 3000)
+                    })
+                    .catch((err) => {
+                        console.error("Gagal menyalin: ", err)
+                        alert(
+                            "Gagal menyalin teks. Browser Anda mungkin tidak mendukung fitur salin otomatis. Silakan salin manual."
+                        )
+                    })
+            }
+
+            // --- INISIALISASI & EVENT LISTENERS ---
+
+            // 1. Muat template saat halaman dibuka
+            muatTemplateDariStorage()
+
+            // 2. Event listener untuk menyimpan template saat ada perubahan
+            templateArea.addEventListener("input", simpanTemplateKeStorage)
+
+            // 3. Event listener untuk tombol Salin
+            tombolSalin.addEventListener("click", salinTeks)
+
+            // 4. Event listener untuk tombol Reset
+            tombolReset.addEventListener("click", resetTemplate)
+        </script>
+    </body>
+    <!-- </html> -->
+</html>

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let wishes = Array.isArray(json.data) ? json.data.reverse() : []
 
             // 🔹 Hanya ambil 5 ucapan terbaru
-            wishes = wishes.slice(0, 5)
+            // wishes = wishes.slice(0, 5)
 
             wishList.innerHTML = ""
 
@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
             `
                 wishList.appendChild(div)
             })
+            // 💡 Tampilkan pesan jika tidak ada ucapan
+            if (wishes.length === 0) {
+                wishList.innerHTML = "<p>Belum ada ucapan saat ini.</p>"
+            }
         } catch (error) {
             console.error("Gagal memuat data:", error)
             wishList.innerHTML = "<p>Gagal memuat ucapan.</p>"

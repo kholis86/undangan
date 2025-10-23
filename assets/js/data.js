@@ -1,8 +1,13 @@
 // data.js
 const WEDDING_DATA = {
+    //music
+    music: {
+        source: "msc/sotya-restianade.mp3", // Pastikan path ini benar!
+        type: "audio/mpeg"
+    },
     // 1. Informasi Dasar & Meta Data
     meta: {
-        title: "Undangan Pernikahan — Ines dan Andik",
+        title: "Undangan Pernikahan — Ines & Andri",
         description:
             "Doa dan restu Anda sangat berarti. Lihat detail acara, galeri, dan konfirmasi hadir di undangan digital ini.",
         ogImage:
@@ -22,16 +27,15 @@ const WEDDING_DATA = {
             parents: "Putri dari Bapak Eko Pariyono & Ibu Sumiyati",
             address:
                 "Dsn. Paldaplang Rt 02 Rw 07 Ds. Kauman Kec. Widodaren Kab. Ngawi",
-            image: "img/and5.jpeg"
+            image: "img/ines.png"
         },
         groom: {
-            name: "Nama Mempelai Pria",
-            parents: "Putra dari Bapak A & Ibu B",
-            address:
-                "Dsn. Paldaplang Rt 02 Rw 07 Ds. Kauman Kec. Widodaren Kab. Ngawi",
-            image: "img/and8.jpeg"
+            name: "Andri Sussanto (Andik)",
+            parents: "Putra dari Bapak Sutrisno & Ibu Suparti",
+            address: "Sidorejo, Sidolaju 08/04, Widodaren, Ngawi",
+            image: "img/andik.png"
         },
-        jointName: "Ines dan Andik",
+        jointName: "Ines & Andri",
         heroImage: "img/and2.jpeg" // Gambar di bagian hero (page 1)
     },
 
@@ -47,19 +51,21 @@ const WEDDING_DATA = {
         list: [
             {
                 type: "Akad Nikah",
-                date: "20",
+                date: "04",
                 dayString: "Sabtu, Desember 2025",
-                timeString: "09:00 - 11:00 WIB",
-                location: "Masjid Al-Falah, Jakarta",
+                timeString: "07:00 WIB",
+                location:
+                    "Dsn. Paldaplang Rt 02 Rw 07 Ds. Kauman Kec. Widodaren Kab. Ngawi",
                 mapLink:
                     "https://google.com/maps?q=-7.4044464,111.2023701&z=17&hl=id"
             },
             {
                 type: "Resepsi",
-                date: "20",
+                date: "04",
                 dayString: "Sabtu, Desember 2025",
-                dtimeString: "11:00 - 14:00 WIB",
-                location: "Gedung Serba Guna, Jakarta",
+                timeString: "10:00 WIB",
+                location:
+                    "Dsn. Paldaplang Rt 02 Rw 07 Ds. Kauman Kec. Widodaren Kab. Ngawi",
                 mapLink:
                     "https://google.com/maps?q=-7.4044464,111.2023701&z=17&hl=id"
             }

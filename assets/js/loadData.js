@@ -1,4 +1,4 @@
-// script.js
+// loadData.js
 document.addEventListener("DOMContentLoaded", () => {
     // Pastikan data telah dimuat
     if (typeof WEDDING_DATA === "undefined") {
@@ -11,6 +11,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const DATA = WEDDING_DATA
 
     // --- UTILITY FUNCTIONS ---
+
+    // Fungsi untuk mengisi sumber musik
+    function fillMusicSource(data) {
+        const audioElement = document.getElementById("bgMusic")
+        if (!audioElement || !data.music || !data.music.source) return
+
+        // Buat elemen <source> baru
+        const sourceElement = document.createElement("source")
+        sourceElement.src = data.music.source
+        sourceElement.type = data.music.type
+
+        // Bersihkan konten lama (jika ada) dan tambahkan source baru
+        // Kita harus memastikan tidak ada source yang tersisa dari html sebelumnya
+        while (audioElement.firstChild) {
+            audioElement.removeChild(audioElement.firstChild)
+        }
+        audioElement.appendChild(sourceElement)
+
+        // Muat ulang elemen audio untuk mengenali source baru
+        audioElement.load()
+    }
 
     // 1. Fungsi untuk mendapatkan nama tamu dari URL
     function getGuestNameFromUrl() {
@@ -111,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>${person.name}</h3>
             <p>${person.parents}</p>
             <p>${person.address}</p>
-        `
+            `
     }
 
     // 3. Mengisi Detail Acara (Akad & Resepsi)
@@ -268,6 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     musicBtn.addEventListener("click", toggleMusic)
 
     // --- MAIN INITIALIZATION ---
+    fillMusicSource(DATA)
     fillStaticContent()
     createPersonCard(DATA.couple.bride, "brideCard")
     createPersonCard(DATA.couple.groom, "groomCard")

@@ -47,126 +47,144 @@
         />
         <link rel="stylesheet" href="assets/css/style.css" />
     </head>
-
     <body>
-        <div id="cover">
-            <div class="cover-inner">
-                <div class="cover-title">The Wedding Of</div>
-                <div class="cover-name" id="coverNames"></div>
-                <div class="cover-sub">
-                    Kepada Yth: <strong id="guestName"></strong>
+        <div class="phone-container">
+            <div class="main-content">
+                <div id="cover">
+                    <div class="cover-inner">
+                        <div class="cover-title">The Wedding Of</div>
+                        <div class="cover-name" id="coverNames"></div>
+                        <div class="cover-sub">
+                            Kepada Yth: <strong id="guestName"></strong>
+                        </div>
+                        <button class="open-btn" id="openInvite">
+                            💌 Buka Undangan
+                        </button>
+                    </div>
                 </div>
-                <button class="open-btn" id="openInvite">
-                    💌 Buka Undangan
-                </button>
+                <main class="wrap">
+                    <section id="page1" class="section hero">
+                        <div class="hero-bg"></div>
+                        <div class="oval" id="heroImageContainer"></div>
+                        <div class="hero-text">
+                            <div class="small">Welcome to Our Wedding</div>
+                            <div class="title">We invite you to celebrate</div>
+                            <div class="names" id="heroNames"></div>
+                        </div>
+                        <div class="lower-third">
+                            <p id="quoteText"></p>
+                            <span id="quoteSource"></span>
+                            <hr />
+                        </div>
+                    </section>
+
+                    <section id="page3" class="section">
+                        <div
+                            class="person-card card-border"
+                            id="brideCard"
+                        ></div>
+                        <section id="separator" class="section separator">
+                            <div class="and-symbol">&</div>
+                        </section>
+                        <div
+                            class="person-card card-border"
+                            id="groomCard"
+                        ></div>
+                    </section>
+
+                    <section id="page6" class="section countdown">
+                        <h2>Save The Date</h2>
+                        <div class="count-grid">
+                            <div class="event-card-time">
+                                <div class="count-item">
+                                    <b id="days">00</b><span>Hari</span>
+                                </div>
+                            </div>
+                            <div class="event-card-time">
+                                <div class="count-item">
+                                    <b id="hours">00</b><span>Jam</span>
+                                </div>
+                            </div>
+                            <div class="event-card-time">
+                                <div class="count-item">
+                                    <b id="minutes">00</b><span>Menit</span>
+                                </div>
+                            </div>
+                            <div class="event-card-time">
+                                <div class="count-item">
+                                    <b id="seconds">00</b><span>Detik</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-cards" id="eventCardsContainer"></div>
+                    </section>
+
+                    <section id="page5" class="section">
+                        <div class="gallery-wrap">
+                            <div class="gallery-main" id="galleryMain"></div>
+                            <div class="thumbs" id="thumbs"></div>
+                        </div>
+                    </section>
+
+                    <section id="pageGift" class="section pageGift">
+                        <h2 class="section-title">Wedding Gift</h2>
+                        <p class="section-subtitle">
+                            Kehadiran dan doa restu Anda sudah menjadi hadiah
+                            terindah bagi kami. Namun bagi yang ingin berbagi
+                            tanda kasih, dapat melalui rekening berikut:
+                        </p>
+
+                        <p class="section-subtitle" id="giftAddressText"></p>
+
+                        <div class="bank-cards" id="bankCardsContainer"></div>
+                    </section>
+
+                    <section id="pageWishes" class="section wishes">
+                        <h2 class="section-title">Ucapan & Doa</h2>
+                        <p class="section-subtitle">
+                            Tulis ucapan terbaikmu untuk kami
+                        </p>
+
+                        <form id="wishForm" class="wish-form">
+                            <input
+                                type="text"
+                                id="wishName"
+                                placeholder="Nama kamu"
+                            />
+                            <textarea
+                                id="wishMessage"
+                                placeholder="Tulis ucapanmu di sini..."
+                            ></textarea>
+                            <button type="submit" id="wishSubmit">
+                                Kirim Ucapan
+                            </button>
+                        </form>
+                        <div id="wishList" class="wish-list"></div>
+                    </section>
+
+                    <section id="separator" class="section separator">
+                        <h2>Terima Kasih</h2>
+                        <p>Doa dan restu Anda sangat berarti bagi kami.</p>
+                    </section>
+                    <section id="separator" class="section separator">
+                        <h2></h2>
+                    </section>
+                </main>
+
+                <audio id="bgMusic" loop>
+                    Your browser does not support the audio element.
+                </audio>
+
+                <button id="musicBtn" class="musicClass">▶️</button>
+
+                <nav class="bottom-nav">
+                    <a href="#page1" class="nav-btn"><i>🏠</i>Home</a>
+                    <a href="#page3" class="nav-btn"><i>👰</i>Mempelai</a>
+                    <a href="#page6" class="nav-btn"><i>⏰</i>Acara</a>
+                    <a href="#pageWishes" class="nav-btn"><i>💬</i>Ucapan</a>
+                </nav>
             </div>
         </div>
-
-        <main class="wrap">
-            <section id="page1" class="section hero">
-                <div class="hero-bg"></div>
-                <div class="oval" id="heroImageContainer"></div>
-                <div class="hero-text">
-                    <div class="small">Welcome to Our Wedding</div>
-                    <div class="title">We invite you to celebrate</div>
-                    <div class="names" id="heroNames"></div>
-                </div>
-                <div class="lower-third">
-                    <p id="quoteText"></p>
-                    <span id="quoteSource"></span>
-                    <hr />
-                </div>
-            </section>
-
-            <section id="page3" class="section">
-                <div class="person-card card-border" id="brideCard"></div>
-            </section>
-
-            <section id="separator" class="section separator">
-                <div class="and-symbol">&</div>
-            </section>
-
-            <section id="page4" class="section">
-                <div class="person-card card-border" id="groomCard"></div>
-            </section>
-
-            <section id="page6" class="section countdown">
-                <h2>Save The Date</h2>
-                <div class="count-grid">
-                    <div class="count-item">
-                        <b id="days">00</b><span>Hari</span>
-                    </div>
-                    <div class="count-item">
-                        <b id="hours">00</b><span>Jam</span>
-                    </div>
-                    <div class="count-item">
-                        <b id="minutes">00</b><span>Menit</span>
-                    </div>
-                    <div class="count-item">
-                        <b id="seconds">00</b><span>Detik</span>
-                    </div>
-                </div>
-                <div class="event-cards" id="eventCardsContainer"></div>
-            </section>
-
-            <section id="page5" class="section">
-                <div class="gallery-wrap">
-                    <div class="gallery-main" id="galleryMain"></div>
-                    <div class="thumbs" id="thumbs"></div>
-                </div>
-            </section>
-
-            <section id="pageGift" class="section gift">
-                <h2 class="section-title">Wedding Gift</h2>
-                <p class="section-subtitle">
-                    Kehadiran dan doa restu Anda sudah menjadi hadiah terindah
-                    bagi kami. Namun bagi yang ingin berbagi tanda kasih, dapat
-                    melalui rekening berikut:
-                </p>
-
-                <p class="section-subtitle" id="giftAddressText"></p>
-
-                <div class="bank-cards" id="bankCardsContainer"></div>
-            </section>
-
-            <section id="pageWishes" class="section wishes">
-                <h2 class="section-title">Ucapan & Doa</h2>
-                <p class="section-subtitle">
-                    Tulis ucapan terbaikmu untuk kami
-                </p>
-
-                <form id="wishForm" class="wish-form">
-                    <input type="text" id="wishName" placeholder="Nama kamu" />
-                    <textarea
-                        id="wishMessage"
-                        placeholder="Tulis ucapanmu di sini..."
-                    ></textarea>
-                    <button type="submit" id="wishSubmit">Kirim Ucapan</button>
-                </form>
-                <div id="wishList" class="wish-list"></div>
-            </section>
-
-            <section id="page7" class="section closing">
-                <h2>Terima Kasih</h2>
-                <p>Doa dan restu Anda sangat berarti bagi kami.</p>
-            </section>
-        </main>
-
-        <audio id="bgMusic" loop>
-            <source src="msc/PUSPITA_NALA.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-        </audio>
-
-        <button id="musicBtn" class="musicClass">▶️</button>
-
-        <nav class="bottom-nav">
-            <a href="#page1" class="nav-btn"><i>🏠</i>Home</a>
-            <a href="#page3" class="nav-btn"><i>👰</i>Bride</a>
-            <a href="#page6" class="nav-btn"><i>⏰</i>Countdown</a>
-            <a href="#page5" class="nav-btn"><i>🖼️</i>Gallery</a>
-            <a href="#pageGift" class="nav-btn"><i>🎁</i>Gift</a>
-            <a href="#pageWishes" class="nav-btn"><i>💬</i>Ucapan</a>
-        </nav>
 
         <script src="assets/js/data.js"></script>
         <script src="assets/js/loadData.js"></script>
